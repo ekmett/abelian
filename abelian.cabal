@@ -1,0 +1,37 @@
+name:          abelian
+category:      Algebra
+version:       0
+license:       BSD2
+cabal-version: >= 1.8
+license-file:  LICENSE.md
+author:        Edward A. Kmett
+maintainer:    Edward A. Kmett <ekmett@gmail.com>
+stability:     provisional
+homepage:      http://github.com/ekmett/abelian/
+bug-reports:   http://github.com/ekmett/abelian/issues
+copyright:     Copyright (C) 2018 Edward A. Kmett
+synopsis:      Commutativity
+description:   Commutativity.
+build-type:    Simple
+extra-source-files:
+  CHANGELOG.md
+  README.md
+
+source-repository head
+  type: git
+  location: git://github.com/ekmett/abelian.git
+
+library
+  build-depends:
+    base >= 4   && < 5,
+    comonad,
+    containers,
+    linear,
+    tagged,
+    transformers
+  hs-source-dirs:  src
+  exposed-modules: 
+    Control.Commutative
+    Data.Semigroup.Commutative
+
+  ghc-options: -Wall
