@@ -23,20 +23,23 @@ source-repository head
 
 library
   build-depends:
-    base         >= 4.11 && < 5,
-    comonad      >= 5 && < 6,
-    containers   >= 0.5 && < 0.6,
-    free         >= 5 && < 6,
-    linear       >= 1.20 && < 2,
-    mtl          >= 2.2 && < 2.3,
-    tagged       >= 0.0 && < 1,
-    transformers >= 0.3 && < 0.6
+    base          >= 4.11 && < 5,
+    base-orphans  >= 0.7 && < 0.8,
+    comonad       >= 5 && < 6,
+    containers    >= 0.5 && < 0.6,
+    free          >= 5 && < 6,
+    linear        >= 1.20 && < 2,
+    mtl           >= 2.2 && < 2.3,
+    semigroupoids >= 5 && < 6,
+    tagged        >= 0.0 && < 1,
+    transformers  >= 0.3 && < 0.6
   hs-source-dirs:  src
   exposed-modules: 
     Control.Commutative
     Control.Commutative.Monad.Free
     Control.Commutative.Monad.List
     Control.Commutative.Monad.Trans
+    Data.Functor.Comm
     Data.Semigroup.Commutative
 
   ghc-options: -Wall

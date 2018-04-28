@@ -13,6 +13,7 @@ import Data.Proxy
 import Data.Semigroup as Semigroup
 import Data.Set
 import Data.Tagged
+import Data.Void
 import GHC.Event
 
 -- | 
@@ -21,6 +22,7 @@ import GHC.Event
 -- @
 class Semigroup m => CommutativeSemigroup m
 
+instance CommutativeSemigroup Void
 instance CommutativeSemigroup Any
 instance CommutativeSemigroup All
 instance Ord a => CommutativeSemigroup (Min a)
