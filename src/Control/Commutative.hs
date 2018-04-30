@@ -34,24 +34,22 @@ import Linear
 import Linear.Plucker
 import Linear.V
 
-
 -- |
 -- @
 -- ('<*>') = 'flip' ('<**>')
 -- @
-
 class Applicative m => Commutative m
 
 instance (Commutative f, Commutative g) => Commutative (Compose f g)
-instance (Commutative m, CommutativeMonoid w) => Commutative (Strict.WriterT w m)
-instance (Commutative m, CommutativeMonoid w) => Commutative (Lazy.WriterT w m)
-instance CommutativeMonoid a => Commutative ((,) a)
 
 -- instance (CommutativeMonoid a, CommutativeMonoid b) => Commutative ((,,) a b)
 -- instance (CommutativeMonoid a, CommutativeMonoid b, CommutativeMonoid c) => Commutative ((,,,) a b c)
 -- instance (CommutativeMonoid a, CommutativeMonoid b, CommutativeMonoid c, CommutativeMonoid d) => Commutative ((,,,,) a b c d)
+
+instance CommutativeMonoid w => Commutative ((,) w)
 instance Commutative ((->) e)
-instance Commutative m => Commutative (ReaderT e m)
+
+-- linear
 instance Commutative V4
 instance Commutative V3
 instance Commutative V2
@@ -61,26 +59,42 @@ instance Commutative Plucker
 instance Dim n => Commutative (V n)
 instance Commutative Complex
 instance Commutative Quaternion
+
+-- @transformers@
+instance Commutative m => Commutative (ReaderT e m)
 instance Commutative Identity
 instance Commutative m => Commutative (IdentityT m)
 instance (Commutative m, Commutative n) => Commutative (Functor.Product m n)
 instance CommutativeMonad m => Commutative (MaybeT m)
 instance Commutative m => Commutative (Reverse m)
 instance Commutative m => Commutative (Backwards m)
-instance CommutativeMonoid a => Commutative (Const a)
+instance (Commutative m, CommutativeMonoid w) => Commutative (Strict.WriterT w m)
+instance (Commutative m, CommutativeMonoid w) => Commutative (Lazy.WriterT w m)
+
+-- @tagged@
 instance Commutative (Tagged a)
 instance Commutative Proxy
--- instance Commutative m => Commutative (Kleisli m a)
-instance Commutative (Cokleisli w a)
+
+-- Control.Applicative
 instance Commutative ZipList
-instance Commutative f => Commutative (Alt f)
+instance CommutativeMonoid a => Commutative (Const a)
+
+-- Control.Arrow
+-- instance Commutative m => Commutative (Kleisli m a)
+
+-- Data.Semigroup
 instance Commutative Semigroup.Last -- NB: Not CommutativeMonoid!
 instance Commutative Semigroup.First -- NB: Not CommutativeMonoid!
+instance Commutative Option -- NB: Not CommutativeMonoid!
+
+-- Data.Monoid
 instance Commutative Monoid.Last -- NB: Not CommutativeMonoid!
 instance Commutative Monoid.First -- NB: Not CommutativeMonoid!
 instance Commutative Monoid.Product -- NB: Not CommutativeMonoid!
 instance Commutative Monoid.Sum -- NB: Not CommutativeMonoid!
-instance Commutative Option -- NB: Not CommutativeMonoid!
+instance Commutative f => Commutative (Alt f)
+
+-- GHC.Generics
 instance Commutative m => Commutative (M1 i c m)
 instance (Commutative f, Commutative g) => Commutative (f :.: g)
 instance (Commutative f, Commutative g) => Commutative (f :*: g)
@@ -88,9 +102,14 @@ instance (Commutative f, Commutative g) => Commutative (f :*: g)
 instance Commutative f => Commutative (Rec1 f)
 instance Commutative Par1
 instance Commutative U1
+
+-- @comonads@
 instance (Commutative w, CommutativeMonoid e) => Commutative (EnvT e w)
 instance Commutative w => Commutative (TracedT e w)
+instance Commutative (Cokleisli w a)
 -- instance Commutative f => Commutative (Ap f) -- ghc 8.6
+
+-- instance CommutativeSemigroup w => Commutative (Validation w)
 
 class    (Commutative m, Monad m) => CommutativeMonad m
 instance (Commutative m, Monad m) => CommutativeMonad m

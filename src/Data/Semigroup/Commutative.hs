@@ -17,9 +17,7 @@ import Data.Void
 import GHC.Event
 
 -- | 
--- @
--- ('<>') = 'flip' ('<>')
--- @
+-- @m '<>' n = n '<>' m@
 class Semigroup m => CommutativeSemigroup m
 
 instance CommutativeSemigroup Void

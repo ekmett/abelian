@@ -11,7 +11,10 @@ homepage:      http://github.com/ekmett/abelian/
 bug-reports:   http://github.com/ekmett/abelian/issues
 copyright:     Copyright (C) 2018 Edward A. Kmett
 synopsis:      Commutativity
-description:   Commutativity.
+description:
+  Commutativity.
+  .
+  "These commutative delights have monoidal ends" -- @cubfoxxen on twitch
 build-type:    Simple
 extra-source-files:
   CHANGELOG.md
@@ -26,6 +29,7 @@ library
     base          >= 4.11 && < 5,
     base-orphans  >= 0.7 && < 0.8,
     comonad       >= 5 && < 6,
+    contravariant >= 1.4 && < 2,
     containers    >= 0.5 && < 0.6,
     free          >= 5 && < 6,
     linear        >= 1.20 && < 2,
@@ -34,12 +38,13 @@ library
     tagged        >= 0.0 && < 1,
     transformers  >= 0.3 && < 0.6
   hs-source-dirs:  src
-  exposed-modules: 
+  exposed-modules:
     Control.Commutative
     Control.Commutative.Monad.Free
     Control.Commutative.Monad.List
     Control.Commutative.Monad.Trans
     Data.Functor.Comm
+    Data.Functor.Contravariant.Divisible.Commutative
     Data.Semigroup.Commutative
 
   ghc-options: -Wall
